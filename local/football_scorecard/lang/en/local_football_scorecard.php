@@ -9,3 +9,4 @@ $string['add_player'] = 'Add Player';
 $string['edit_player'] = 'Edit Player';
 $string['delete_player'] = 'Delete Player';
 $string['player_list'] = 'Player List';
+$string['edit'] = 'Edit';

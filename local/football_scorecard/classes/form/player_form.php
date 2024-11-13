@@ -8,6 +8,10 @@ require_once("$CFG->libdir/formslib.php");
 class player_form extends \moodleform {
     public function definition() {
         $mform = $this->_form;
+
+        //id field is added as a hidden input so it can be passed along with the form submission when edit
+        $mform->addElement('hidden', 'id');
+        $mform->setType('id', PARAM_INT);
         
         $mform->addElement('text', 'player_name', get_string('player_name', 'local_football_scorecard'));
         $mform->setType('player_name', PARAM_TEXT);
