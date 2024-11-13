@@ -15,23 +15,36 @@ echo $OUTPUT->heading(get_string('player_list', 'local_football_scorecard'));
 // Query to get player data
 $players = $DB->get_records('football_scorecard_players');
 
-// Define the table and add an "Edit" column header
 $table = new html_table();
 $table->head = [
-    get_string('player_name', 'local_football_scorecard'), 
-    get_string('goal_count', 'local_football_scorecard'), 
+    get_string('player_name', 'local_football_scorecard'),
+    get_string('goal_count', 'local_football_scorecard'),
     get_string('match_date', 'local_football_scorecard'),
-    get_string('edit', 'local_football_scorecard')
+    get_string('edit', 'local_football_scorecard'),
+    get_string('delete', 'local_football_scorecard') // Add delete header
 ];
 
-// Populate the table with player data and an "Edit" link for each player
 foreach ($players as $player) {
     $date = userdate($player->match_date);
+    
     $editlink = html_writer::link(
         new moodle_url('/local/football_scorecard/edit.php', array('id' => $player->id)),
         get_string('edit', 'local_football_scorecard')
     );
-    $table->data[] = [$player->player_name, $player->goal_count, $date, $editlink];
+
+    $deletelink = html_writer::link(
+        new moodle_url('/local/football_scorecard/delete.php', array('id' => $player->id)),
+        get_string('delete', 'local_football_scorecard'),
+        ['onclick' => "return confirm('Are you sure you want to delete this player?');"]
+    );
+
+    $table->data[] = [
+        $player->player_name,
+        $player->goal_count,
+        $date,
+        $editlink,
+        $deletelink
+    ];
 }
 
 echo html_writer::table($table);

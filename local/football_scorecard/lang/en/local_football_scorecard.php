@@ -10,3 +10,5 @@ $string['edit_player'] = 'Edit Player';
 $string['delete_player'] = 'Delete Player';
 $string['player_list'] = 'Player List';
 $string['edit'] = 'Edit';
+$string['delete'] = 'Delete';
+$string['player_deleted'] = 'Player has been deleted successfully.';
